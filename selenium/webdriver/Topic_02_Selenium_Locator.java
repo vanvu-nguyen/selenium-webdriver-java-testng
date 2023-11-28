@@ -30,7 +30,7 @@ public class Topic_02_Selenium_Locator {
     /*
     1. Selenium locator = html attribute
     2. Selenium version 1.x, 2.x, 3.x, 4.x has 8 Locator types:
-        - id, class, name (=html attribute)
+        - id, class, name (=html a ttribute)
         - css, xpath
         - tag name (= html tag)
         - linktext, partial linktext (= html <a> tag)
@@ -53,6 +53,7 @@ public class Topic_02_Selenium_Locator {
         - Non-primitive types:
             + String: string name = "tam"
             + Class: FirefoxDriver firefoxDriver = new FirefoxDriver ()
+            + By (By.cssSelector())
             + Interface: Webdriver driver
             + Object: Object name = "Automation FC"
             + Java Collection: (learn later)
