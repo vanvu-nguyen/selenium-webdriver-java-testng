@@ -9,6 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Topic_03_Relative_Locator {
@@ -55,10 +56,15 @@ public class Topic_03_Relative_Locator {
                 .above(loginButtonElement)
                 .toRightOf(rememberMeCheckboxElement)
                 .toLeftOf(forgotPasswordElement)
-                .below(inputPasswordElement));
+                .below(inputPasswordElement)
+                .near(forgotPasswordElement));
 
         // Print out element tag content
         System.out.println(rememberMeTextElement.getText());
+
+        // Print number of <a> tag in this page
+        List<WebElement> allLinks = driver.findElements(RelativeLocator.with(By.cssSelector("a")));
+        System.out.println(allLinks.size());
     }
 
     @AfterClass
@@ -66,3 +72,21 @@ public class Topic_03_Relative_Locator {
         driver.quit();
     }
 }
+
+        // XPath format: //tag_name[@attribute_name='attribute_value']
+
+        /*
+        Locator priority (the best locator must pass the order 1->2->3)
+        1. Unique: attribute value must be unique (check XPath on Devtool to determine the value is unique or not, do not use the attribute if Devtool return more than 1 result)
+        2. Meaning: attribute value must has meaning with the tag using
+        3. Prioritize id/class/name attribute
+        ---
+        4. If element does not have id/class/name, other attributes is the same, we can use any of them, use any attribute unique and has meaning
+        5. Do not use the attribute does not have value (null)
+        ---
+        6. With link (<a> tag), do not use the href attribute because maybe the domain of link will be changed or the link is wrong with differnce envoriment (a framework need to support all env/server) -> use content of the <a> tag
+        7. With link (<a> tag), do not use the content of <a> tag when page has multi language -> use href attribute
+        ---
+        8. Do not use //* because it make performance slowly
+        9. Do not place the value in "", it better '' -> this makes code more beautiful
+         */
