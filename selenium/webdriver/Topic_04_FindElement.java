@@ -57,4 +57,6 @@ public class Topic_04_FindElement {
 }
 
         // The XPath function starts-with() is good for using with the element attribute has a prefix
+        // Java getText() function will get all text content inside the html tag (all text content in parent node and child node)
+
 
