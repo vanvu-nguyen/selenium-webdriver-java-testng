@@ -1,13 +1,18 @@
 package webdriver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.logging.LogType;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.awt.*;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -48,8 +53,56 @@ public class Topic_08_WebBrowser_Commands {
         Return the empty list when does not find any matched element and contuinue to implement the next step
          */
         List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
-
         // 2 methods findElement() and findElements() are influenced by function 'implicitWait'
+
+        // This function used to get the current url address
+        driver.getCurrentUrl();
+        // No need to declaration a variable if it's just used 1 time
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.facebook.com/");
+        // This function used to get the html, css, js source code of the current page
+        driver.getPageSource();
+        // This function used to get the title of the current page
+        driver.getTitle();
+        // This function used to get the GUID of the current tab
+        driver.getWindowHandle();
+        driver.getWindowHandles();
+
+        // The functions of manage():
+        // Get cookies info (will learn more in Framework)
+        driver.manage().getCookies();
+        // Get log from Devtool:
+        driver.manage().logs().get(LogType.DRIVER);
+        // Set the time for waiting for searching element
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        // Set the time for waiting for loading a page
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5);
+        // Set the time for waiting for JavascriptExecutor framework finish execution
+        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(10));
+        // Get time info of function: implicitlyWait(), pageLoadTimeout(), scriptTimeout()
+        driver.manage().timeouts().getImplicitWaitTimeout();
+        driver.manage().timeouts().getPageLoadTimeout();
+        driver.manage().timeouts().getScriptTimeout();
+        // Turn on fullscreen mode for browser (= press F11)
+        driver.manage().window().fullscreen();
+        // Maximize the browser window
+        driver.manage().window().maximize();
+        // Minimize the browser window to the taskbar/dock
+        driver.manage().window().minimize();
+        // Set displayed dimension of browser window for test responsive
+        driver.manage().window().setSize(new Dimension(1366,768));
+        // Get displayed dimension of browser window
+        driver.manage().window().getSize();
+        // Set the position of the top-left browser border based on device display solution
+        driver.manage().window().setPosition(new Point(0, 0));
+        // Get the position of the browser window
+        driver.manage().window().getPosition();
+
+        driver.navigate();
+
+        driver.switchTo();
+
+
+        )
     }
 
     // Declaration for TestNG annotation @AfterClass which runs finally of every testcase
