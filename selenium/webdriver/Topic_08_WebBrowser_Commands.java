@@ -77,7 +77,7 @@ public class Topic_08_WebBrowser_Commands {
         // Set the time for waiting for searching element, ineffective if declare after findElement() function
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); // **
         // Set the time for waiting for loading a page
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5);
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
         // Set the time for waiting for JavascriptExecutor framework finish execution
         driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(10));
         // Get time info of function: implicitlyWait(), pageLoadTimeout(), scriptTimeout()
@@ -122,10 +122,7 @@ public class Topic_08_WebBrowser_Commands {
         // Focus back to the previous frame
         driver.switchTo().defaultContent();
         // Focus to the parent frame
-        driver.switchTo().parentFrame()`
-
-
-        )
+        driver.switchTo().parentFrame();
     }
 
     // Declaration for TestNG annotation @AfterClass which runs finally of every testcase

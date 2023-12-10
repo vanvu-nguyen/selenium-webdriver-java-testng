@@ -8,7 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Topic_05_Assert {
-    WebDriver driver
+    WebDriver driver;
     /*
     This lesson is about the verified functions of TestNG library
         - Java has many libraries support to verify data called 'Testing Framework'
