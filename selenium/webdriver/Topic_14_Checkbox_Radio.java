@@ -111,6 +111,23 @@ public class Topic_14_Checkbox_Radio {
         Assert.assertTrue(targetRadioButton.isSelected());
     }
 
+    @Test
+    public void TC_05_Google_Form() {
+        driver.get("https://docs.google.com/forms/d/e/1FAIpQLSfiypnd69zhuDkjKgqvpID9kwO29UCzeCVrGGtbNPZXQok0jA/viewform");
+        WebElement canTho = driver.findElement(By.xpath("//div[@aria-label='Cần Thơ']"));
+        WebElement quangNam = driver.findElement(By.xpath("//div[@aria-label='Quảng Nam']"));
+        // Solution 1 for verify uncheck item: base on the different html attribute value before and after choose radio/checkbox and using assertEquals
+        Assert.assertEquals(canTho.getAttribute("aria-checked"), "false");
+        Assert.assertEquals(quangNam.getAttribute("aria-checked"), "false");
+        // Solution 2 using isDisplayed()
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Cần Thơ' and @aria-checked='false']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Quảng Nam' and @aria-checked='false']")).isDisplayed());
+        canTho.click();
+        quangNam.click();
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Cần Thơ' and @aria-checked='true']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@aria-label='Quảng Nam' and @aria-checked='true']")).isDisplayed());
+    }
+
     @AfterClass
     public void afterClass() {
         driver.quit();
