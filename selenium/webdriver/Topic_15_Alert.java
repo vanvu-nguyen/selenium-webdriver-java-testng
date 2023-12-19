@@ -11,6 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Array;
 import java.time.Duration;
 
 public class Topic_15_Alert {
@@ -63,11 +64,24 @@ public class Topic_15_Alert {
 
     @Test
     public void TC_04_Authentication_Alert() {
+        /*
+        // Solution 1: Pass the id and password directly to url
         driver.get("https://admin:admin@the-internet.herokuapp.com/basic_auth");
         sleepInSecond(3);
         Assert.assertEquals(driver.findElement(By.xpath("//p")).getText(), "Congratulations! You must have the proper credentials.");
+        */
+
+        // Solution 2: In case do not know the url
+        driver.get("https://the-internet.herokuapp.com/");
+        String originalAuthUrl = driver.findElement(By.xpath("//a[text()='Basic Auth']")).getAttribute("href");
+        accessAuthenticationSite(originalAuthUrl, "admin", "admin");
+        Assert.assertEquals(driver.findElement(By.xpath("//p")).getText(), "Congratulations! You must have the proper credentials.");
     }
 
+    @Test
+    public void TC_05_Authentication_Alert_CDP() {
+        // ... See the document (contains code)
+    }
     @AfterClass
     public void afterClass() {
         driver.quit();
@@ -81,4 +95,9 @@ public class Topic_15_Alert {
         }
     }
 
+    public void accessAuthenticationSite (String originalUrl, String userName, String passWord) {
+        String[] splitUrl = originalUrl.split("//");
+        String finalUrl = splitUrl[0] + "//" + userName + ":" + passWord + "@" + splitUrl[1];
+        driver.get(finalUrl);
+    }
 }
