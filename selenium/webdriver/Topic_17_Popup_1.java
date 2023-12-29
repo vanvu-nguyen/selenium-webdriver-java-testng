@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Topic_17_Popup_Frame_Window {
+public class Topic_17_Popup_1 {
     WebDriver driver;
     Actions actions;
 
