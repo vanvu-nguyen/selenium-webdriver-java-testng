@@ -58,6 +58,52 @@ public class Topic_22_Tab_Window {
         }
     }
 
+    @Test
+    public void TC_02_() {
+        driver.get("https://skills.kynaenglish.vn/");
+        // No popup shown -> could not catch the element
+        driver.findElement(By.xpath("//div[@class='hotline']//a[@href='https://www.facebook.com/kyna.vn']/img")).click();
+        sleepInSecond(3);
+        switchToByTitle("Facebook");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.facebook.com/kyna.vn");
+        switchToByTitle("Kyna.vn - Học online cùng chuyên gia");
+        driver.findElement(By.xpath("//div[@class='hotline']//a[@href='https://www.youtube.com/user/kynavn']/img")).click();
+        sleepInSecond(3);
+        switchToByTitle("Kyna.vn - YouTube");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.youtube.com/user/kynavn");
+        switchToByTitle("Kyna.vn - Học online cùng chuyên gia");
+        Set<String> allExistedTabIds = driver.getWindowHandles();
+        for (String eId : allExistedTabIds) {
+            driver.switchTo().window(eId);
+            if (!driver.getTitle().equals("Kyna.vn - Học online cùng chuyên gia")) {
+                driver.close();
+            }
+        }
+    }
+
+    @Test
+    public void TC_03_() {
+        driver.get("http://live.techpanda.org/");
+        driver.findElement(By.xpath("//a[@href='http://live.techpanda.org/index.php/mobile.html']")).click();
+        sleepInSecond(3);
+        driver.findElement(By.xpath("//a[@title='Xperia']/following-sibling::div[@class='product-info']//a[text()='Add to Compare']")).click();
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']")).getText(), "The product Sony Xperia has been added to comparison list.");
+        driver.findElement(By.xpath("//a[@title='Samsung Galaxy']/following-sibling::div[@class='product-info']//a[text()='Add to Compare']")).click();
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']")).getText(), "The product Samsung Galaxy has been added to comparison list.");
+        driver.findElement(By.xpath("//button[@title='Compare']")).click();
+        sleepInSecond(3);
+        switchToByTitle("Products Comparison List - Magento Commerce");
+        Assert.assertEquals(driver.getTitle(), "Products Comparison List - Magento Commerce");
+        driver.findElement(By.xpath("//button[@title='Close Window']")).click();
+        switchToByTitle("Mobile");
+        driver.findElement(By.xpath("//a[text()='Clear All']")).click();
+        driver.switchTo().alert().accept();
+        sleepInSecond(3);
+        Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']//span")).getText(), "The comparison list was cleared.");
+    }
+
     @AfterClass
     public void afterClass() {
         //driver.quit();
