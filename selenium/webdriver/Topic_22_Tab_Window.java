@@ -3,6 +3,8 @@ package webdriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -16,11 +18,14 @@ import java.util.Set;
 
 public class Topic_22_Tab_Window {
     WebDriver driver;
+    WebDriver driver1;
+
     Actions actions;
 
     @BeforeClass
     public void beforeClass() {
         driver = new FirefoxDriver();
+        driver1 = new FirefoxDriver();
         actions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
@@ -102,6 +107,20 @@ public class Topic_22_Tab_Window {
         driver.switchTo().alert().accept();
         sleepInSecond(3);
         Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']//span")).getText(), "The comparison list was cleared.");
+    }
+
+    @Test
+    public void TC_04_() {
+        // Using function newWindow(WindowType.TAB/WINDOW), help to open new tab/window and the available driver will switch to the demand tab/window
+        driver.get("https://www.facebook.com/home.php");
+        driver.switchTo().newWindow(WindowType.TAB).get("https://open.spotify.com/");
+        // If you want to switch to any other tab/window, you have to use the function switchToByTitle()
+    }
+
+    @Test
+    public void TC1() {
+        driver.get("https://www.youtube.com/");
+        driver1.get("https://open.spotify.com/");
     }
 
     @AfterClass
