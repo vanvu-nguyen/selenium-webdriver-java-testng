@@ -132,6 +132,7 @@ public class Topic_22_Tab_Window {
         Set<String> allTabIds = driver.getWindowHandles();
         for (String id: allTabIds) {
             driver.switchTo().window(id);
+            sleepInSecond(3);
             if (driver.getTitle().equals(expectedTitle)) {
                 break;
             }
