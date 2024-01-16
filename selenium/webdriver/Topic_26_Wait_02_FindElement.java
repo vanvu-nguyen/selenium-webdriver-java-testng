@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Topic_26_Wait_02_FindElement_implicitlyWait {
+public class Topic_26_Wait_02_FindElement {
     WebDriver driver;
 
     @BeforeClass
