@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Tiki project" verbose="1" parallel="tests" thread-count="2">
+    <test name="Run on Chrome">
+        <parameter name="browser" value="Chrome"></parameter>
+        <classes>
+            <class name="webdriver.Topic_34_TestNG_Frame_Work"/>
+        </classes>
+    </test>
+
+    <test name="Run on Firefox">
+        <parameter name="browser" value="Firefox"></parameter>
+        <classes>
+            <class name="webdriver.Topic_34_TestNG_Frame_Work"/>
+        </classes>
+    </test>
+
+</suite>

@@ -3,16 +3,16 @@ package webdriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.Duration;
+import java.util.Locale;
 
 public class Topic_34_TestNG_Frame_Work {
     WebDriver driver;
@@ -22,10 +22,34 @@ public class Topic_34_TestNG_Frame_Work {
 
     By closePop = By.xpath("//input[@name='reg_email__']/ancestor::div[@class='_8ien']/img");
 
-
+    @Parameters("browser")
     @BeforeClass
-    public void beforeClass() {
-        driver = new FirefoxDriver();
+    public void beforeClass(@Optional("chrome") String browserName) {
+
+        if (browserName.toLowerCase().equals("chrome")) {
+            System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/chromedriver");
+            driver = new ChromeDriver();
+        } else if (browserName.toLowerCase().equals("firefox")) {
+            System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver");
+            driver = new FirefoxDriver();
+        } else {throw new RuntimeException("Browser name is not valid");}
+
+/*
+        switch (browserName) {
+            case "Firefox":
+                System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver");
+                driver = new FirefoxDriver();
+                break;
+            case "Chrome":
+                System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/chromedriver");
+                driver = new ChromeDriver();
+                break;
+            default:
+                throw new RuntimeException("Browser name is not valid");
+        }
+*/
+
+
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
@@ -83,7 +107,7 @@ public class Topic_34_TestNG_Frame_Work {
         };
     }
 
-    @Test
+    @Test (invocationCount = 2)
     public void TC_04_Presence() {
         driver.get("https://www.facebook.com/");
         driver.findElement(By.xpath("//a[@data-testid='open-registration-form-button']")).click();
