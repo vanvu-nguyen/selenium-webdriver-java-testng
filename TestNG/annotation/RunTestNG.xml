@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Tiki project" verbose="1">
+    <test name="Run on Chrome">
+        <classes>
+            <class name="annotation.Annotation"/>
+            <class name="annotation.Assertion"/>
+            <class name="annotation.Topic_01_Annotations"/>
+        </classes>
+    </test>
+</suite>
